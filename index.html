@@ -1,15 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do you love me?</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Do you love me?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: 'Pacifico', cursive;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    h1 {
+      color: #fff;
+      font-size: 3em;
+      letter-spacing: 0.05em;
+      text-shadow: 2px 4px 10px #d16ba5;
+      margin-bottom: 20px;
+    }
+    .heart {
+      font-size: 2em;
+      color: #ee9ca7;
+      margin-bottom: 14px;
+      animation: pulse 1.2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1);}
+      50% { transform: scale(1.12);}
+      100% { transform: scale(1);}
+    }
+    .btns {
+      display: flex;
+      gap: 30px;
+      margin-top: 16px;
+      position: relative;
+    }
+    .btn {
+      background: #fff;
+      color: #ee9ca7;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.5em;
+      padding: 16px 42px;
+      font-family: inherit;
+      box-shadow: 0 2px 12px #ffb9b9aa;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn:hover {
+      background: #ee9ca7;
+      color: #fff;
+    }
+    #no-button.moving {
+      position: fixed;
+    }
+  </style>
 </head>
 <body>
-    <h1>Do You Love Me ?</h1>
-    <input id="yes-button" type="button" value="YES" onclick="clickYesButton()">
-    <input id="no-button" type="button" value="NO" onmouseover="hoverNoButton()">
-    <script src="scripts.js"></script>
+  <div class="heart">💞 💖 💗</div>
+  <h1>Do You Love Me?</h1>
+  <div class="btns">
+    <input id="yes-button" type="button" class="btn" value="YES" onclick="clickYesButton()">
+    <input id="no-button" type="button" class="btn" value="NO" onmouseover="hoverNoButton()" onclick="clickNoButton()">
+  </div>
+
+  <script>
+    // Click yes button
+    function clickYesButton() {
+      alert('I love you too <3');
+    }
+
+    // Click no button
+    function clickNoButton() {
+      alert('I am glad that you clicked Yes!!!!');
+    }
+
+    // Move button on hover
+    async function hoverNoButton() {
+      const noButton = document.getElementById('no-button');
+      await delay(200);
+      
+      // Add moving class to make it position: fixed
+      noButton.classList.add('moving');
+      
+      // Random from 0 to 1, then multiply with screen size
+      let x = Math.random() * (window.innerWidth - 200);
+      let y = Math.random() * (window.innerHeight - 100);
+
+      noButton.style.left = x + 'px';
+      noButton.style.top = y + 'px';
+    }
+    function delay(time) {
+        return new Promise(resolve => setTimeout(resolve, time));
+    }
+  </script>
 </body>
 </html>
