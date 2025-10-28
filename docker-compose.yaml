@@ -2,10 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: nginx:alpine
-    container_name: my-website
-    ports:
-      - "8083:80"
-    volumes:
-      - .:/usr/share/nginx/html
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: unless-stopped
